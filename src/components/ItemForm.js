@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import firebase from "../firebase";
+import Firebase from "./Firebase";
 
 export default function ItemForm() {
   const [value, setValue] = useState("");
@@ -7,8 +7,7 @@ export default function ItemForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    firebase
-      .firestore()
+    Firebase.firestore()
       .collection("shopping-list-db")
       .add({
         //prop type of string and possibly number (ex: 3 chickens as an item)

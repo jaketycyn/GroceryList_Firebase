@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../firebase";
+import Firebase from "./Firebase";
 import ItemForm from "./ItemForm.js";
 // import { TextField } from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
@@ -73,8 +73,7 @@ function GroceryList() {
 
   useEffect(() => {
     //Creates array of documents within Shopping List DB
-    const unsubscribe = firebase
-      .firestore()
+    const unsubscribe = Firebase.firestore()
       .collection("shopping-list-db")
       .where("list", "==", false)
       .orderBy("timestamp")
@@ -97,8 +96,7 @@ function CartList() {
 
   useEffect(() => {
     //Creates array of documents within Shopping List DB
-    const unsubscribe = firebase
-      .firestore()
+    const unsubscribe = Firebase.firestore()
       .collection("shopping-list-db")
       .where("list", "==", true)
       .orderBy("timestamp")
@@ -120,7 +118,7 @@ function CartList() {
 //Possibly conditional statements within firebase, but atm don't know syntax
 const moveToCart = e => {
   e.preventDefault();
-  let dbRef = firebase.firestore().collection("shopping-list-db");
+  let dbRef = Firebase.firestore().collection("shopping-list-db");
 
   let itemId = e.target.parentElement.getAttribute("id");
   dbRef.doc(itemId).update({
@@ -130,7 +128,7 @@ const moveToCart = e => {
 
 const moveToList = e => {
   e.preventDefault();
-  let dbRef = firebase.firestore().collection("shopping-list-db");
+  let dbRef = Firebase.firestore().collection("shopping-list-db");
 
   let itemId = e.target.parentElement.getAttribute("id");
   dbRef.doc(itemId).update({
@@ -144,8 +142,7 @@ const deleteItem = e => {
   let id = e.target.parentElement.parentElement.getAttribute("id");
 
   window.confirm("Do you wish to permanetly delete this item?")
-    ? firebase
-        .firestore()
+    ? Firebase.firestore()
         .collection("shopping-list-db")
         .doc(id)
         .delete()
