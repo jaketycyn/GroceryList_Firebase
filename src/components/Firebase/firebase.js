@@ -11,9 +11,11 @@ const config = {
   appId: process.env.REACT_APP_ID
 };
 
+if (!app.apps.length) {
+  app.initializeApp(config);
+}
 class Firebase {
   constructor() {
-    app.initializeApp(config);
     this.auth = app.auth();
   }
 
