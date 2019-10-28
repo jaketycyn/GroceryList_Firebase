@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navigation from "../Navigation";
@@ -12,33 +12,16 @@ import AdminPage from "../Admin";
 
 import * as ROUTES from "../../constants/routes";
 import { withFirebase } from "../Firebase";
+import { AuthUserContext } from "../Session";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  const [isLoggedIn, setLoggedIn] = useState([]);
 
-    this.state = {
-      authUser: null
-    };
-  }
-
-  componentDidMount() {
-    this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null });
-    });
-  }
-
-  componentWillUnmount() {
-    this.listener();
-  }
-
-  render() {
-    return (
+  return (
+    <AuthUserContext.Provider value={{ isLoggedIn, setLoggedIn }}>
       <Router>
         <div>
-          <Navigation authUser={this.state.authUser} />
+          <Navigation authUser={{ isLoggedIn, setLoggedIn }} />
 
           <hr />
 
@@ -60,8 +43,8 @@ class App extends Component {
       </div> */}
         </div>
       </Router>
-    );
-  }
+    </AuthUserContext.Provider>
+  );
 }
 
 export default withFirebase(App);

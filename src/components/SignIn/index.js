@@ -39,7 +39,6 @@ class SignInFormBase extends Component {
       .catch(error => {
         this.setState({ error });
       });
-
     event.preventDefault();
   };
 
@@ -64,7 +63,7 @@ class SignInFormBase extends Component {
           name="password"
           value={password}
           onChange={this.onChange}
-          type="text"
+          type="password"
           placeholder="Password"
         />
         <button disabled={isInvalid} type="submit">

@@ -1,4 +1,5 @@
 import React from "react";
+import AuthUserContext from "./context";
 
 const Session = () => (
   <div>
@@ -7,3 +8,4 @@ const Session = () => (
 );
 
 export default Session;
+export { AuthUserContext };

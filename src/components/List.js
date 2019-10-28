@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+// import Firebase from "@firebase/app";
 import Firebase from "./Firebase";
+import "@firebase/firestore";
 import ItemForm from "./ItemForm.js";
 // import { TextField } from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
@@ -96,7 +99,7 @@ function CartList() {
 
   useEffect(() => {
     //Creates array of documents within Shopping List DB
-    const unsubscribe = Firebase.firestore()
+    const unsubscribe = Firebase()
       .collection("shopping-list-db")
       .where("list", "==", true)
       .orderBy("timestamp")
